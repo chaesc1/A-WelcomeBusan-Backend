@@ -17,7 +17,7 @@ public class PostRequsetDTO {
     private String title;
     private String content;
     private int hits;
-
+    private String userid;
     public static Post toEntity(PostRequsetDTO dto) {
         return Post.builder()
                 .id(dto.getId()) // DTO의 id를 엔티티의 id에 매핑

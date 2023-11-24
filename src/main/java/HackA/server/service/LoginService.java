@@ -31,7 +31,7 @@ public class LoginService {
 //        this.env = env;
 //    }
 
-    public void socialLogin(String code, String registrationId) {
+    public String socialLogin(String code, String registrationId) {
 //        log.info("error point::{}", code);
         String accessToken = getAccessToken(code, registrationId);
         JsonNode userResourceNode = getUserResource(accessToken, registrationId);
@@ -56,6 +56,7 @@ public class LoginService {
                     .build();
             memberRepository.save(member);
         }
+        return member.getGoogleId();
     }
 
     private String getAccessToken(String authorizationCode, String registrationId) {

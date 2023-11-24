@@ -2,7 +2,9 @@ package HackA.server.dto.response;
 
 import HackA.server.domain.Post;
 import HackA.server.dto.request.PostRequsetDTO;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +19,7 @@ public class PostResponseDTO {
     private String title;
     private String content;
     private int hits;
-
+    List<CommentResponseDTO> commentResponseDTOList = new ArrayList<>();
     public static Post toEntity(PostResponseDTO postResponseDTO) {
         return Post.builder()
                 .id(postResponseDTO.getId())

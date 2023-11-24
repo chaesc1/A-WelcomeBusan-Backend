@@ -1,11 +1,16 @@
 package HackA.server.domain;
 
 import HackA.server.domain.common.BaseEntity;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,6 +37,9 @@ public class Post extends BaseEntity {
 
     @Column(nullable = true)
     private int hits;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private List<Comment> commentList = new ArrayList<>();
 
     public void modifyPost(String title,String content,int hits){
         this.title = title;
