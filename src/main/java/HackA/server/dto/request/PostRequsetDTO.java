@@ -16,7 +16,7 @@ public class PostRequsetDTO {
     private Long id;
     private String title;
     private String content;
-    private int hits;
+    private Integer hits;
     private String userid;
     public static Post toEntity(PostRequsetDTO dto) {
         return Post.builder()

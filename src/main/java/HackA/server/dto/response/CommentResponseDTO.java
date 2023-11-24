@@ -17,15 +17,15 @@ public class CommentResponseDTO {
     private Long id;
     private String comment_content;
     private int star_cnt;
-    private Member member_id;
-    private Post post_id;
-    public static Comment toEntity(CommentResponseDTO commentResponseDTO) {
-        return Comment.builder()
-                .id(commentResponseDTO.getId())
-                .commentContent(commentResponseDTO.getComment_content())
-                .member(commentResponseDTO.getMember_id())
-                .post(commentResponseDTO.getPost_id())
-                .star_cnt(commentResponseDTO.getStar_cnt())
-                .build();
-    }
+    private Long member_id;
+    private Long post_id;
+//    public static Comment toEntity(CommentResponseDTO commentResponseDTO) {
+//        return Comment.builder()
+//                .id(commentResponseDTO.getId())
+//                .commentContent(commentResponseDTO.getComment_content())
+//                .member(commentResponseDTO.getMember_id().longValue())
+//                .post(commentResponseDTO.getPost_id())
+//                .star_cnt(commentResponseDTO.getStar_cnt())
+//                .build();
+//    }
 }

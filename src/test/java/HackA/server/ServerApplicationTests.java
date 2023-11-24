@@ -35,6 +35,15 @@ class ServerApplicationTests {
     }
 
     @Test
+    void readPost() {
+        PostRequsetDTO postRequsetDTO = PostRequsetDTO.builder()
+                .id(3L)
+                .build();
+
+
+        postService.read(postRequsetDTO.getId());
+    }
+    @Test
     void updatePost() {
         PostRequsetDTO postRequsetDTO = PostRequsetDTO.builder()
                 .id(1L)

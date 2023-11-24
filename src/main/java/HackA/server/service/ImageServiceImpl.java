@@ -54,5 +54,7 @@ public class ImageServiceImpl implements ImageService {
 		if (resource.exists()) {
 			return resource;
 		}
+
+		return null;
 	}
 }

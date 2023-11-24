@@ -23,11 +23,11 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
 
-    private Boolean isValid(String userid) {
-     if (memberRepository.findByGoogleId(userid) == null)
-         return false;
-     return true;
-    }
+//    private Boolean isValid(String userid) {
+//     if (memberRepository.findByGoogleId(userid) == null)
+//         return false;
+//     return true;
+//    }
     @Override
     public PostResponseDTO read(Long id) {
         Post post = postRepository.findById(id)
@@ -46,7 +46,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public boolean savePost(PostRequsetDTO postRequsetDTO) {
-        if(isValid(postRequsetDTO.getUserid()))
+//        if(isValid(postRequsetDTO.getUserid()))
             postRepository.save(PostRequsetDTO.toEntity(postRequsetDTO));
         return false;
     }

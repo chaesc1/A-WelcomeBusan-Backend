@@ -35,16 +35,27 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public boolean saveComment(CommentRequsetDTO commentRequsetDTO) {
+        commentRepository.save(CommentRequsetDTO.toEntity(commentRequsetDTO));
         return false;
     }
 
     @Override
     public boolean updateComment(CommentRequsetDTO commentRequsetDTO) {
-        return false;
+        Comment comment = commentRepository.findById(commentRequsetDTO.getId()).orElseThrow(RuntimeException::new);
+        comment.modifyPost(commentRequsetDTO.getComment_content(),commentRequsetDTO.getStar_cnt());
+
+        try {
+            commentRepository.save(comment);
+        }catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean deleteComment(Long id) {
-        return false;
+        commentRepository.deleteById(id);
+
+        return true;
     }
 }

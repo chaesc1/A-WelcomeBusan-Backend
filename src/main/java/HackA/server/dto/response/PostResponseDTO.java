@@ -2,6 +2,7 @@ package HackA.server.dto.response;
 
 import HackA.server.domain.Post;
 import HackA.server.dto.request.PostRequsetDTO;
+import jakarta.persistence.criteria.CriteriaBuilder.In;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +19,7 @@ public class PostResponseDTO {
     private Long id;
     private String title;
     private String content;
-    private int hits;
+    private Integer hits;
     List<CommentResponseDTO> commentResponseDTOList = new ArrayList<>();
     public static Post toEntity(PostResponseDTO postResponseDTO) {
         return Post.builder()

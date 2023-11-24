@@ -36,12 +36,12 @@ public class Post extends BaseEntity {
     private String content;
 
     @Column(nullable = true)
-    private int hits;
+    private Integer hits;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Comment> commentList = new ArrayList<>();
 
-    public void modifyPost(String title,String content,int hits){
+    public void modifyPost(String title,String content,Integer hits){
         this.title = title;
         this.content = content;
         this.hits = hits;

@@ -2,6 +2,8 @@ package HackA.server.domain;
 
 import HackA.server.domain.common.BaseEntity;
 import HackA.server.dto.response.CommentResponseDTO;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -35,15 +37,18 @@ public class Comment extends BaseEntity {
     @Column(nullable = true, length = 255)
     private int star_cnt;
 
+    @JsonIgnoreProperties({"comment"})
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @JsonIgnoreProperties({"comment"})
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "post_id")
     private Post post;
 
-
-
-
+    public void modifyPost(String commentContent,int star_cnt){
+        this.commentContent = commentContent;
+        this.star_cnt = star_cnt;
+    }
 }

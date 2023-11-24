@@ -13,8 +13,8 @@ public class commentConverter {
                     .id(c.getId())
                     .comment_content(c.getCommentContent())
                     .star_cnt(c.getStar_cnt())
-                    .member_id(c.getMember())
-                    .post_id(c.getPost())
+                    .member_id(c.getMember().getId())
+                    .post_id(c.getPost().getId())
                     .build();
 
             cdtolist.add(cdto);
