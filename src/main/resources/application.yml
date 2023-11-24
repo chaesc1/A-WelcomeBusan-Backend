@@ -1,7 +1,7 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/groupA
-    username: localhost
+    username: root
     password: COwjdgns1!
     driver-class-name: com.mysql.cj.jdbc.Driver
   sql:
@@ -17,3 +17,10 @@ spring:
         hbm2ddl:
           auto: update
         default_batch_fetch_size: 1000
+oauth2:
+  google:
+    client-id: 172090420660-ib14rk0d8e1tmqra6fsvd7tdb4lg3pva.apps.googleusercontent.com
+    client-secret: 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
+    redirect-uri: http://localhost:8080/login/oauth2/code/google
+    token-uri: https://oauth2.googleapis.com/token
+    resource-uri: https://www.googleapis.com/oauth2/v2/userinfo

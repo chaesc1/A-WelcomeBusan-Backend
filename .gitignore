@@ -37,5 +37,4 @@ out/
 .vscode/
 
 #Project exclude path
-src/main/resources/
-application-oauth.yml
+src/main/resources/application.yml
