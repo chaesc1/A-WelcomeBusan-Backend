@@ -1,8 +1,8 @@
 package HackA.server.repository;
 
+import HackA.server.domain.UploadImage;
+import java.awt.Image;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import HackA.server.domain.Image;
-
-public interface ImageRepository extends JpaRepository<Image, Long> {
+public interface ImageRepository extends JpaRepository<UploadImage, Long> {
 }

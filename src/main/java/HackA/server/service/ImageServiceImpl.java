@@ -1,5 +1,7 @@
 package HackA.server.service;
 
+import HackA.server.domain.UploadImage;
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -12,7 +14,6 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import HackA.server.domain.Image;
 import HackA.server.repository.ImageRepository;
 import lombok.AllArgsConstructor;
 
@@ -23,7 +24,7 @@ public class ImageServiceImpl implements ImageService {
 	private ImageRepository imageRepository;
 	@Override
 	public String uploadImage(MultipartFile file) throws IOException {
-		String originFileName = file.getName();
+//		String originFileName = file.getName();
 		String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
 		Path filePath = Paths.get(uploadPath, fileName);
 
@@ -31,9 +32,11 @@ public class ImageServiceImpl implements ImageService {
 
 		try {
 			file.transferTo(filePath);
-			Image image = Image.builder()
-					.fileName(fileName)
-			imageRepository.save();
+			UploadImage image = UploadImage.builder()
+					.name(fileName)
+					.build();
+
+			imageRepository.save(image);
 
 		} catch (Exception e) {
 			e.getStackTrace();

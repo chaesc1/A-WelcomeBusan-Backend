@@ -1,5 +1,8 @@
 package HackA.server.controller;
 
+import HackA.server.service.ImageService;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.beans.factory.annotation.Autowired;
