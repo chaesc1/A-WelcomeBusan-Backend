@@ -1,10 +1,11 @@
 package HackA.server.service;
 
+import HackA.server.domain.Member;
+import HackA.server.repository.MemberRepository;
 import com.fasterxml.jackson.databind.JsonNode;
-import jakarta.annotation.PostConstruct;
-import lombok.Value;
+import java.util.Optional;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -18,16 +19,17 @@ import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @Service
+@AllArgsConstructor
 public class LoginService {
 
     private final Environment env;
-
+    private final MemberRepository memberRepository;
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    public LoginService(Environment env) {
-        this.env = env;
-    }
+//    public LoginService(Environment env) {
+//        this.env = env;
+//    }
 
     public void socialLogin(String code, String registrationId) {
 //        log.info("error point::{}", code);
@@ -41,8 +43,19 @@ public class LoginService {
         System.out.println("id = " + id);
         System.out.println("email = " + email);
         System.out.println("nickname = " + nickname);
+        //정보 확인 후 쿠키 아이디 생성
 
         //Insert
+        Optional<Member> optionalMember = memberRepository.findByGoogleId(id);
+//        log.info("error point::{}",optionalMember);
+        Member member = optionalMember.orElse(null);
+        if (member == null) {
+            member = Member.builder()
+                    .nickname(nickname)
+                    .googleId(id)
+                    .build();
+            memberRepository.save(member);
+        }
     }
 
     private String getAccessToken(String authorizationCode, String registrationId) {
@@ -64,13 +77,14 @@ public class LoginService {
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
         HttpEntity entity = new HttpEntity(params, headers);
-        ResponseEntity<JsonNode> responseNode = restTemplate.exchange(tokenUri, HttpMethod.POST, entity, JsonNode.class);
+        ResponseEntity<JsonNode> responseNode = restTemplate.exchange(tokenUri, HttpMethod.POST, entity,
+                JsonNode.class);
         JsonNode accessTokenNode = responseNode.getBody();
         return accessTokenNode.get("access_token").asText();
     }
 
     private JsonNode getUserResource(String accessToken, String registrationId) {
-        String resourceUri = env.getProperty("oauth2."+registrationId+".resource-uri");
+        String resourceUri = env.getProperty("oauth2." + registrationId + ".resource-uri");
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + accessToken);

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/login/oauth2", produces = "application/json")
 public class LoginController {
 
-    LoginService  loginService;
+    LoginService loginService;
 
     public LoginController(LoginService loginService) {
         this.loginService = loginService;
