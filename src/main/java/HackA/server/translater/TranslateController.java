@@ -21,7 +21,6 @@ public class TranslateController {
 
 	@PostMapping("/papago")
 	public String translateByPapago(@RequestBody TranslateText translateText) {
-		// TranslateText에 targetLan이 있다고 가정합니다.
 		translateService.setLanguage(translateText.getTargetLan());
 
 		String translatedText = translateService.translateByPapago(translateText.getInputText());

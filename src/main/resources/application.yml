@@ -1,9 +1,12 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/groupA
-    username: localhost
-    password: COwjdgns1!
+    url: jdbc:mysql://localhost:3306/h
+    username: root
+    password: yhc1228
     driver-class-name: com.mysql.cj.jdbc.Driver
+  api:
+    clientId: QfTEijdvKk61bG_U8Vcq
+    clientSecret: lV2OU6hmsX
   sql:
     init:
       mode: never

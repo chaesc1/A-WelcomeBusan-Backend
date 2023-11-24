@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>번역 앱</title>
+</head>
+<body>
+<label for="language">언어 선택:</label>
+<select id="language">
+    <option value="en">영어</option>
+    <option value="ja">일본어</option>
+</select>
+
+<br>
+
+<label for="inputText">텍스트 입력:</label>
+<textarea id="inputText" rows="4" cols="50"></textarea>
+
+<br>
+
+<button onclick="translateText()">번역</button>
+
+<br>
+
+<h3>번역 결과:</h3>
+<div id="translationResult"></div>
+
+<script>
+    function translateText() {
+        var selectedLanguage = document.getElementById("language").value;
+        var inputText = document.getElementById("inputText").value;
+
+        // /api/translate/papago 경로로 번역 요청
+        fetch('/api/translate/papago', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                inputText: inputText,
+                targetLan: selectedLanguage,
+            }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                // 번역 결과 표시
+                document.getElementById("translationResult").innerText = data.translatedText;
+            })
+            .catch(error => {
+                console.error('번역 요청 실패:', error);
+            });
+    }
+</script>
+</body>
+</html>

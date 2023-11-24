@@ -23,8 +23,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class TranslateServiceImpl implements TranslateService {
 	private final TranslateText tt;
 	private String clientId = "QfTEijdvKk61bG_U8Vcq";
-
-
 	private String clientSecret = "lV2OU6hmsX";
 
 	private static String apiURL = "https://openapi.naver.com/v1/papago/n2mt";
